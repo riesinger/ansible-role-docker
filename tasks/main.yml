@@ -1,4 +1,12 @@
 ---
+- name: Add overlay module to /etc/modules
+  lineinfile:
+    path: /etc/modules
+    line: "overlay"
+    state: present
+- name: Load the overlay kernel module
+  command: sudo modprobe overlay
+
 - name: Copy certificates for Docker registries (if provided)
   copy:
     src: "{{ docker_ca_certificates_src_dir }}/{{ item }}"
